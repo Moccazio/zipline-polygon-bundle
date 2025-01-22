@@ -147,8 +147,10 @@ def generate_csv_agg_tables(
             pa.field("low", price_type, nullable=False),
             pa.field("window_start", timestamp_type, nullable=False),
             pa.field("transactions", pa.int64(), nullable=False),
+            pa.field("part", pa.string(), nullable=True),  # Add this line
         ]
     )
+
     if config.agg_time == "minute":
         polygon_aggs_schema = polygon_aggs_schema.append(
             pa.field(PARTITION_COLUMN_NAME, pa.string(), nullable=False)
